@@ -1,1 +1,2 @@
-maas ${MAAS_PROFILE} tags create name=${TAG_NAME} definition="//lldp:interface/lldp:chassis/lldp:name = "switch-${CHASSIS_NAME}"
+# This will tag nodes as "switch-${CHASSIS_NAME}" if they are attached to a switch that reports a chassis name of ${CHASSIS_NAME} via lldp output
+maas ${MAAS_PROFILE} tags create name="switch-${CHASSIS_NAME}" definition="//lldp:interface/lldp:chassis/lldp:name = "${CHASSIS_NAME}"
