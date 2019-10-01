@@ -1,2 +1,2 @@
 # mxt
-MAAS XPath Tags
+Example MAAS XPath Tags
