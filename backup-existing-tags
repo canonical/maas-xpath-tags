@@ -1,0 +1,2 @@
+maas ${MAAS_PROFILE} tags read|jq -r '.[]|select(.name == "virtual"|not)|"maas '${MAAS_PROFILE}' tags create name=\(.name) definition='"'"'\(.definition)'"'"' comment='"'"'\(.comment)'"'"' kernel_opts='"'"'\(.kernel_opts)'"'"'\n"'
+

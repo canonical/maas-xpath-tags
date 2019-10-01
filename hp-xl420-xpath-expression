@@ -1,0 +1,5 @@
+#This tag will identify any Generation of HP XL420 Server (G1-G9)
+maas ${MAAS_PROFILE} tags create name=XL420 \
+comment="xpath tag to automatically identify Proliant XL420 Servers" \
+definition='contains(//node[@id="core" and @class="bus"]/product,"XL420")' 
+

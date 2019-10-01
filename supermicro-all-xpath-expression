@@ -1,0 +1,5 @@
+#This tag has a definition that should match all SuperMicro Servers
+maas ${MAAS_PROFILE} tags create name=SuperMicro \
+comment="xpath tag to automatically identify SuperMirco Servers" \
+definition='//node[@id="core" and @class="bus"]/vendor = "Supermicro"' 
+

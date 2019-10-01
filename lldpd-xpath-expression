@@ -1,0 +1,1 @@
+maas ${MAAS_PROFILE} tags create name=${TAG_NAME} definition="//lldp:interface/lldp:chassis/lldp:name = "switch-${CHASSIS_NAME}"

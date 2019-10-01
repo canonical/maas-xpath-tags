@@ -1,0 +1,8 @@
+# This tag will identify machines with ten (10) 10GB spindles and tag as ceph-node
+#
+# Note: Adjust size (in bytes) and disk count to suit your needs
+
+maas ${MAAS_PROFILE} tags create \
+name=ceph-node \
+definition='count(//node[@class="disk" and contains(size,"10000831348736")]) = 10' \
+comment='xpath auto-tag for supermicro servers with ten 10TB disks'

@@ -1,0 +1,5 @@
+#This tag will identify any Generation of HP DL360 Server (G1-G9)
+maas ${MAAS_PROFILE} tags create name=DL360 \
+comment="xpath tag to automatically identify Proliant DL360 Servers" \
+definition='contains(//node[@id="core" and @class="bus"]/product,"DL360")' 
+

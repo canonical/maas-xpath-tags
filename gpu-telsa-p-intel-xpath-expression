@@ -1,0 +1,7 @@
+# Note - if you have a single cpu machine, change cpu:0 to just cpu at the start of the definition
+
+maas ${MAAS_PROFILE} tags create \
+name=gpgpu-tesla-p-i \
+comment="Enable passthrough for Nvidia Tesla P series GPUs on Intel" \
+definition='//node[@id="cpu:0"]/capabilities/capability/@id = "vmx" and //node[@id="display"]/vendor[contains(.,"NVIDIA")] and //node[@id="display"]/description[contains(.,"3D")] and //node[@id="display"]/product[contains(.,"Tesla P")]' 
+

@@ -1,0 +1,1 @@
+maas ${MAAS_PROFILE} tag update metal-intel definition='not(starts-with(//node[@class="system"]/vendor,"QEMU")) and //node[@id="cpu:0"]/capabilities/capability/@id = "vmx" or //node[@id="cpu"]/capabilities/capability/@id = "vmx" and contains(//node[@id="cpu"]/product,"Intel")'

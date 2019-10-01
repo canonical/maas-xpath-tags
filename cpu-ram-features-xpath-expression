@@ -1,0 +1,17 @@
+# This tag will identify a machine with proper that CPU tags,
+# cores, and RAM and tag them as hypervisor
+#
+# Note: Adjust cores and RAM (in bytes) to suit your needs
+#       This example looks for 40 cores and 256 GB of RAM and has all the required CPU features for being a hypervisor
+#       for both Intel and AMD
+
+maas ${MAAS_PROFILE} tags create name=hypervisor \
+definition=//node[@id="memory"]/size >= "274877906944" and \
+//node[@id="cpu"]/configuration/setting/id="cores" >= 40 and \
+//node[@id="cpu"]//capabilities/capability/@id = "vmx" or @id="svm" and \
+//node[@id="cpu"]//capabilities/capability/@id = "aes" and 
+//node[@id="cpu"]//capabilities/capability/@id = "flexpriority" and 
+//node[@id="cpu"]//capabilities/capability/@id = "tpr_shadow" and 
+//node[@id="cpu"]//capabilities/capability/@id = "ept" and 
+//node[@id="cpu"]//capabilities/capability/@id = "vpid" and 
+//node[@id="cpu"]//capabilities/capability/@id = "vnmi"'

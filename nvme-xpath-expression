@@ -1,0 +1,1 @@
+maas ${MAAS_PROFILE} tags create name=NVME comment="xpath tag for automatically tagging servers that have NVME controllers" definition='//node[@id="storage" and @class="storage"]/description = "Non-Volatile memory controller"'
