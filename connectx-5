@@ -1,0 +1,11 @@
+#Note:  This assumes that your MAAS profile is called "admin".  Adjust the variable to suit your environment
+#Note: You must be logged into the MAAS cli for this command to work
+#Note: Login into the MAAS CLI with "maas login <profile> <url> <apikey>"
+#e.g. maas login ${MAAS_PROFILE:-admin} http://${MAAS_IP:-localhost}:5240/MAAS $(sudo maas apikey --username=${MAAS_PROFILE:-admin})
+
+# This will tag servers with Mellanox ConnectX-5 NICs
+
+maas ${MAAS_PROFILE:-admin} tags create \
+	name=connectx-4 \
+	definition='//node[@class="network"]/vendor[starts-with(.,"Mellanox")] and //node[@class="network"]/product[contains(.,"ConnectX-5")]' \
+	comment='Tag for automatically identifying servers with Mellanox Technologies ConnectX-5 cards'
