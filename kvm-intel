@@ -1,0 +1,13 @@
+#Note:  This assumes that your MAAS profile is called "admin".  Adjust the variable to suit your environment
+#Note: You must be logged into the MAAS cli for this command to work
+#Note: Login into the MAAS CLI with "maas login <profile> <url> <apikey>"
+#e.g. maas login ${MAAS_PROFILE:-admin} http://${MAAS_IP:-localhost}:5240/MAAS $(sudo maas apikey --username=${MAAS_PROFILE:-admin})
+
+# This will tag KVM VMs running on Intel-based hosts using legacy firmware (non-UEFI)
+
+maas ${MAAS_PROFILE:-admin} tags create \
+	name=kvm-intel \
+	definition='//node[@class="system"]/vendor = "QEMU" and //node[@class="processor"]/vendor[starts-with(.,"Intel")] and not //node[@id="firmware"]/capabilities/capability/@id = "uefi"' \
+	kernel_opts='mitigations=off nomodeset console=tty0 console=ttyS0,115200n8 intel_iommu=on kvm-intel.nested=1 kvm-intel.enable_apicv=n kvm.ignore_msrs=1' \
+	comment='Tag for automatically identifying KVM vms (non-UEFI) running on Intel-based servers' 
+
