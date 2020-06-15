@@ -8,5 +8,5 @@
 maas ${MAAS_PROFILE:-admin} tags create \
 	name=kvm-amd \
 	definition='//node[@class="system"]/vendor = "QEMU" and //node[@class="processor"]/vendor[starts-with(.,"Advanced Micro Devices")] and not //node[@id="firmware"]/capabilities/capability/@id = "uefi"' \
-	kernel_opts='mitigations=off nomodeset console=tty0 console=ttyS0,115200n8 amd_iommu=on kvm-amd.nested=1 kvm-amd.enable_apicv=n kvm.ignore_msrs=1' \
+	kernel_opts='nomodeset console=tty0 console=ttyS0,115200n8 amd_iommu=on kvm-amd.nested=1 kvm-amd.enable_apicv=n kvm.ignore_msrs=1' \
 	comment='Tag for automatically identifying AMD-based KVM vms (Legacy BIOS)' 
