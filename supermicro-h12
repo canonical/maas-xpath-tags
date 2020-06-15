@@ -9,4 +9,4 @@ maas ${MAAS_PROFILE:-admin} tags create \
 	name=supermicro-h12 \
 	definition='//node[@id="core" and @class="bus"]/vendor = "Supermicro" and //node[@id="core" and @class="bus"]//product[starts-with(.,"H12")]' \
 	kernel_opts='nomodeset nvme_core.multipath=0 console=tty1 console=ttyS1,115200n8 earlyprintk=serial,ttyS1,115200n8 amd_iommu=on iommu=pt kvm-amd.nested=1' \
-	comment='Tag for automatically identifying servers with Supermicro H12-based (Intel) motherboards'
+	comment='Tag for automatically identifying servers with Supermicro H12-based (AMD) motherboards'
