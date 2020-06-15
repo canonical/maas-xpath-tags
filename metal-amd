@@ -3,7 +3,7 @@
 #Note: Login into the MAAS CLI with "maas login <profile> <url> <apikey>"
 #e.g. maas login ${MAAS_PROFILE:-admin} http://${MAAS_IP:-localhost}:5240/MAAS $(sudo maas apikey --username=${MAAS_PROFILE:-admin})
 
-# This will tag physical AMD-based Servers
+# This will tag physical AMD-based Servers 
 
 maas ${MAAS_PROFILE:-admin} tags create \
 	name=metal-amd \
