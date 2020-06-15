@@ -1,0 +1,12 @@
+#Note:  This assumes that your MAAS profile is called "admin".  Adjust the variable to suit your environment
+#Note: You must be logged into the MAAS cli for this command to work
+#Note: Login into the MAAS CLI with "maas login <profile> <url> <apikey>"
+#e.g. maas login ${MAAS_PROFILE:-admin} http://${MAAS_IP:-localhost}:5240/MAAS $(sudo maas apikey --username=${MAAS_PROFILE:-admin})
+
+# This will tag UEFI enabled KVM vms running on AMD-based servers
+
+maas ${MAAS_PROFILE:-admin} tags create \
+	name=kvm-amd-uefi \
+	definition='//node[@class="system"]/vendor = "QEMU" and //node[@id="firmware"]/capabilities/capability/@id = "virtualmachine" and //node[@id="firmware"]/capabilities/capability/@id = "uefi" and //node[@class="processor"]/vendor[starts-with(.,"Advanced Micro Devices")]' \
+	kernel_opts='nomodeset console=tty0 console=ttyS0,115200n8 amd_iommu=on kvm-amd.nested=1 kvm-amd.enable_apicv=n kvm.ignore_msrs=1' \
+	comment='Tag for automatically identifying AMD-based KVM vms (UEFI BIOS)'
