@@ -1,0 +1,12 @@
+#Note:  This assumes that your MAAS profile is called "admin".  Adjust the variable to suit your environment
+#Note: You must be logged into the MAAS cli for this command to work
+#Note: Login into the MAAS CLI with "maas login <profile> <url> <apikey>"
+#e.g. maas login ${MAAS_PROFILE:-admin} http://${MAAS_IP:-localhost}:5240/MAAS $(sudo maas apikey --username=${MAAS_PROFILE:-admin})
+
+# This will tag Supermicro Servers using a H12-based motherboard (AMD)
+
+maas ${MAAS_PROFILE:-admin} tags create \
+	name=supermicro-h12 \
+	definition='//node[@id="core" and @class="bus"]/vendor = "Supermicro" and //node[@id="core" and @class="bus"]//product[starts-with(.,"H12")]' \
+	kernel_opts='nomodeset nvme_core.multipath=0 console=tty1 console=ttyS1,115200n8 earlyprintk=serial,ttyS1,115200n8 amd_iommu=on iommu=pt kvm-amd.nested=1' \
+	comment='Tag for automatically identifying servers with Supermicro H12-based (Intel) motherboards'
