@@ -1,2 +1,16 @@
-maas ${MAAS_PROFILE} tags read|jq -r '.[]|select(.name == "virtual"|not)|"maas '${MAAS_PROFILE}' tags create name=\(.name) definition='"'"'\(.definition)'"'"' comment='"'"'\(.comment)'"'"' kernel_opts='"'"'\(.kernel_opts)'"'"'\n"'
+#Note:  This assumes that your MAAS profile is called "admin".  Adjust the variable to suit your environment
+#Note: You must be logged into the MAAS cli for this command to work
+#Note: Login into the MAAS CLI with "maas login <profile> <url> <apikey>"
+#e.g. maas login ${MAAS_PROFILE:-admin} http://${MAAS_IP:-localhost}:5240/MAAS $(sudo maas apikey --username=${MAAS_PROFILE:-admin})
+
+# This will backup existing custom tags into an executable script (~/maas-tags-backup.sh) which
+# can then be used to recreate the tags in case of a re-install or to copy them to another
+# MAAS region
+
+
+((maas ${MAAS_PROFILE:-admin} tags read| \
+  jq -r '.[]|select(.name == "virtual" or .name == "pod-console-logging"|not)|"maas '${MAAS_PROFILE:-admin}' tags create name=\(.name) definition='"'"'\(.definition)'"'"' comment='"'"'\(.comment)'"'"' kernel_opts='"'"'\(.kernel_opts)'"'"'\n"')| \
+  sed '1s/^/#\!\/bin\/bash\n/')| \
+  tee ~/maas-tags-backup.sh
+chmod +x ~/maas-tags-backup.sh
 
